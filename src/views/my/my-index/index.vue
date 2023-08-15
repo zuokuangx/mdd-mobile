@@ -23,16 +23,24 @@
         </div>
         <div class="under"><van-button round type="success" :class="{'van-ed': todayIsSignIn}" @click="signCoins">{{todayIsSignIn ? '今天已签到，记得明天来啊' : '签到领云愈币'}}</van-button></div>
       </div>
-      <div class="to-test" @click="jump('/my-record?type=1')">
-        <div class="to-test-left">
-          <img src="@/assets/img/my/list.png" alt="info">
+      <div class="test-records">
+        <div class="to-test" @click="jump('/cbt-record')">
+          <div class="to-test-left">
+            <div class="top">心理疏导记录</div>
+            <div class="under">调节情绪 改善心境</div>
+          </div>
+          <div class="to-test-right">
+            <img src="@/assets/img/my/go.png" alt="info">
+          </div>
         </div>
-        <div class="to-test-center">
-          <div class="top">量表测试记录</div>
-          <div class="under">专业测试 客观评估</div>
-        </div>
-        <div class="to-test-right">
-          <img src="@/assets/img/my/go.png" alt="info">
+        <div class="to-test" @click="jump('/my-record?type=1')">
+          <div class="to-test-left">
+            <div class="top">量表测试记录</div>
+            <div class="under">专业测试 客观评估</div>
+          </div>
+          <div class="to-test-right">
+            <img src="@/assets/img/my/go.png" alt="info">
+          </div>
         </div>
       </div>
       <div class="cardList">
@@ -530,39 +538,51 @@ export default {
         }
       }
     }
+    .test-records{
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10rem/@w;
+    }
     .to-test{
-      height: 1.8933rem;
+      margin-right: 11rem/@w;
+      flex: 1;
+      height: 75rem/@w;
       background: #FFFFFF;
-      border-radius: .2667rem;
-      margin-bottom: .2667rem;
-      padding: .4267rem .5333rem;
+      border-radius: 12rem/@w;
+      padding: 16rem/@w 10rem/@w 18rem/@w 20rem/@w;
       box-sizing: border-box;
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      .to-test-left{
+      .to-test-right{
+        width: 20rem/@w;
+        height: 20rem/@w;
+        font-size: 0;
         img{
-          width: 1.04rem;
-          height: 1.04rem;
+          width: 100%;
+          height: 100%;
         }
       }
-      .to-test-center{
-        padding-left: .32rem;
-        flex: 1;
+      .to-test-left{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         .top{
-          color: #333333;
-          font-size: .3733rem;
+          font-size: 14px;
+          line-height: 20px;
+          font-weight: bold;
+          color: #000;
         }
         .under{
-          color: #666666;
-          font-size: .32rem;
+          font-size: 12px;
+          line-height: 17px;
+          color: #999;
         }
       }
-      .to-test-right{
-        img{
-          width: .8rem;
-          height: .8rem;
-        }
-      }
+    }
+    .to-test:last-child{
+      margin-right: 0;
     }
     .cardList{
       height: 2.213333rem;

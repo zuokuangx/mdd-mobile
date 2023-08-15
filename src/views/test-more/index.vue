@@ -2,34 +2,9 @@
   <div class="main">
     <van-loading color="#1989fa" v-if="loading" />
     <div class="header" v-else>
-      <div class="search" @click="$router.push('/search')">
-        <img src="@/assets/img/test/search.png" alt="search">
-        <span>请输入您要找的量表名</span>
+      <div class="recommend" @click="$router.push({ path: '/test-detail', query: { tableCode: 'FADI' } })">
+        <img src="@/assets/img/test/fadi.png" alt="">
       </div>
-      <div class="recommend-box">
-        <span class="recommendTitle">小愈精选</span>
-        <van-row gutter="8">
-          <van-col span="8" v-for="item in recommendList" :key="item.tableCode">
-            <div class="recommend-box-content" :title="item.tableType">
-              <img :src="item.tableLogo" alt="推荐位" style="width: 100%"
-                @click="$router.push({ path: '/test-detail', query: { tableCode: item.tableCode } })">
-              <p class="recommend-title">{{ item.introduction }}</p>
-            </div>
-          </van-col>
-        </van-row>
-      </div>
-      <!-- 轮播图 -->
-      <van-swipe :autoplay="5000">
-        <van-swipe-item>
-          <img @click.stop="openCbt" src="@/assets/img/banner1.png" alt="心理疏导">
-        </van-swipe-item>
-        <van-swipe-item>
-          <img class="game" @click.stop="playGame" src="@/assets/img/test/game.png" alt="game">
-        </van-swipe-item>
-        <van-swipe-item v-for="(item, index) in swipList" :key="index">
-          <img :src="item.imageLink" @click="toDeatil(item)" />
-        </van-swipe-item>
-      </van-swipe>
       <div class="testTitle">
         <img src="@/assets/img/test/deng.png" alt="deng">
         <span>小愈测试</span>
@@ -75,7 +50,7 @@ import { tableTypeList, getAllTable, h5ActivitylList } from '@/api/modules/user'
 import { recommendSeat } from '@/api/modules/table'
 import MainTabbar from '@/components/MainTabbar'
 import NewPersonGift from '@/components/newPerson'
-
+import browser from '@/utils/browser.js'
 export default {
   components: {
     MainTabbar,
@@ -106,6 +81,7 @@ export default {
         }
       })
     }
+    console.log('browser', browser())
   },
   methods: {
     getRecommend () {
@@ -119,7 +95,9 @@ export default {
       this.loading = true
       const res = await tableTypeList({ page: -1, pageSize: 10 })
       this.typeList = res.data.tables
+      console.log('119this.typelist', this.typeList)
       getAllTable().then(table => {
+        console.log('table', table)
         const typeAll = res.data.tables.filter(v => v.count !== 0)
         typeAll.forEach((v, i) => {
           const flag = table.data.some(item => {
@@ -129,6 +107,7 @@ export default {
             typeAll.splice(i, 1)
           }
         })
+        console.log('typeall', typeAll, 'tableall', table.data)
         this.typeList = typeAll
         this.tableAll = table.data
         const id = this.typeList[0].id
@@ -186,42 +165,18 @@ export default {
   // width: 100%;
   min-height: 170rem/@w;
   background: #F4F4F4;
-  padding: 10rem/@w 20rem/@w;
+  padding: 16rem/@w 20rem/@w 10rem/@w;
   overflow: hidden;
-
-  .search {
-    display: flex;
-    align-items: center;
-    width: 315rem/@w;
-    height: 33rem/@w;
-    background: #fff;
-    border-radius: 17rem/@w;
-    padding: 0 10rem/@w;
-
-    img {
-      width: 15rem/@w;
-      height: 17rem/@w;
-    }
-
-    span {
-      font-size: 14rem/@w;
-      color: #999;
-      margin-left: 10rem/@w;
+  .recommend{
+    height: 97rem/@w;
+    margin-bottom: 6rem/@w;
+    font-size: 0;
+    img{
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
     }
   }
-
-  .van-swipe {
-    margin: 10rem/@w 0 16rem/@w 0;
-    width: 100%;
-
-    .van-swipe-item {
-      img {
-        width: 100%;
-        height: 100%;
-      }
-    }
-  }
-
   .testTitle {
     display: flex;
     justify-content: center;
@@ -369,54 +324,4 @@ export default {
   background: rgba(0, 0, 0, 0);
 }
 
-// 推荐位
-.recommend-box {
-  margin: .2667rem 0;
-  padding: .32rem .2667rem;
-  background-color: #fff;
-  border-radius: .32rem;
-
-  .recommendTitle {
-    font: 500 .4267rem/.5867rem PingFang SC-Medium, PingFang SC;
-    color: #242424;
-  }
-
-  .van-row {
-    margin-top: .2133rem;
-
-    .recommend-box-content {
-      position: relative;
-
-      // 推荐位分类标签
-      &::after {
-        content: attr(title);
-        position: absolute;
-        left: 0;
-        top: 0;
-        padding: 0 7px;
-        min-width: 34px;
-        height: 19px;
-        line-height: 19px;
-        text-align: center;
-        color: #fff;
-        border-radius: 5px 0px 5px 0px;
-        transform: scale(.84) translate(-10%, -10%);
-        background: rgba(0, 0, 0, .6);
-      }
-
-      img {
-        border-radius: 4px;
-      }
-    }
-  }
-}
-
-.recommend-title {
-  margin: .1rem 0 0 0;
-  font-size: 12px;
-  color: #666666;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 </style>

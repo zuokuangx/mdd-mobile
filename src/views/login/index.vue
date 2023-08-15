@@ -196,7 +196,7 @@ export default {
             const { url, ...otherQuery } = this.$route.query
             this.$router.push({ path: url, query: otherQuery })
           } else {
-            this.$router.push({ path: '/test-more' })
+            this.$router.push({ path: '/home' })
           }
         }
       }).catch(() => {
