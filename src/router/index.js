@@ -16,6 +16,24 @@ const routes = [
     component: resolve => require(['../views/login/index.vue'], resolve)
   },
   {
+    path: '/home',
+    name: '首页',
+    meta: { title: '首页' },
+    component: resolve => require(['../views/home/index.vue'], resolve)
+  },
+  {
+    path: '/cbt-more',
+    name: '心理疏导',
+    meta: { title: '心理疏导' },
+    component: resolve => require(['../views/cbt-more/index.vue'], resolve)
+  },
+  {
+    path: '/train',
+    name: '专题训练',
+    meta: { title: '专题训练' },
+    component: resolve => require(['../views/train/index.vue'], resolve)
+  },
+  {
     path: '/test-more',
     name: '更多测试',
     meta: { title: '测试' },
@@ -116,6 +134,12 @@ const routes = [
     name: '我的-机构绑定',
     meta: { needLogin: true, title: '云愈心理' },
     component: resolve => require(['../views/my/my-bind/index.vue'], resolve)
+  },
+  {
+    path: '/cbt-record',
+    name: '我的-测试记录',
+    meta: { needLogin: true, title: '云愈心理' },
+    component: resolve => require(['../views/my/cbt-record/index.vue'], resolve)
   },
   {
     path: '/my-record',

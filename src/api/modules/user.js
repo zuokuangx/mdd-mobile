@@ -180,3 +180,43 @@ export const h5ActivitylList = params => fetch({
   method: 'get',
   params
 })
+
+// 查询cbt推荐配置列表
+export const cbtCourseList = params => fetch({
+  url: '/api/cbtCourse/themeCourseList',
+  method: 'get',
+  params
+})
+
+// 查询小愈精选
+export const carefulSelection = params => fetch({
+  url: '/api/app/careful/selection',
+  method: 'get',
+  params
+})
+
+// 查询cbt课程列表
+export const courseList = params => fetch({
+  url: '/api/cbtCourse/courseList',
+  method: 'get',
+  params
+})
+
+// 查询指定课程详情
+export const userCourseInfo = params => fetch({
+  url: '/api/cbtCourse/h5/userCourseInfo',
+  method: 'get',
+  params
+})
+
+export const userThemeCourseList = params => fetch({
+  url: '/api/cbtCourse/userThemeCourseList',
+  method: 'get',
+  params
+})
+
+export const userCourseList = params => fetch({
+  url: '/api/cbtCourse/userCourseList',
+  method: 'get',
+  params
+})
